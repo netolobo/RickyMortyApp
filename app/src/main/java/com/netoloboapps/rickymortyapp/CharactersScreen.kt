@@ -25,19 +25,18 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
             vertical = 8.dp,
             horizontal = 8.dp,
         ),
-    ){
-        itemsIndexed(characters){
-            _,
-            character -> if(character != null){
-                    CharacterItem(
-                        item = character
-                    )
+    ) {
+        itemsIndexed(characters) { _, character ->
+            if (character != null) {
+                CharacterItem(
+                    item = character
+                )
             }
         }
 
         when (val refreshLoadState = characters.loadState.refresh) {
             is LoadState.Loading -> {
-                item{
+                item {
                     LoadingItem(
                         Modifier.fillParentMaxWidth()
                     )
@@ -45,31 +44,33 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
             }
             is LoadState.Error -> {
                 val error = refreshLoadState.error
-                item{
+                item {
                     ErrorItem(
                         message = error.localizedMessage ?: "",
                         modifier = Modifier.fillParentMaxSize(),
-                        onClick = { characters.retry()}
+                        onClick = { characters.retry() }
                     )
                 }
             }
+            else -> {}
         }
 
-        when(val appendLoadState = characters.loadState.append){
+        when (val appendLoadState = characters.loadState.append) {
             is LoadState.Loading -> {
-                item{
+                item {
                     LoadingItem(Modifier.fillParentMaxWidth())
                 }
             }
             is LoadState.Error -> {
                 val error = appendLoadState.error
-                item{
+                item {
                     ErrorItem(
                         message = error.localizedMessage ?: "",
-                        onClick = { characters.retry()}
+                        onClick = { characters.retry() }
                     )
                 }
             }
+            else -> {}
         }
     }
 }
@@ -77,7 +78,7 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
 @Composable
 fun CharacterItem(
     item: Character
-){
+) {
     Card(
         elevation = 4.dp,
         modifier = Modifier
@@ -87,7 +88,7 @@ fun CharacterItem(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
-        ){
+        ) {
             AsyncImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -127,7 +128,7 @@ fun CharacterItem(
 }
 
 @Composable
-fun LoadingItem(modifier: Modifier = Modifier){
+fun LoadingItem(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(24.dp),
         verticalArrangement = Arrangement.Center,
@@ -142,12 +143,12 @@ fun ErrorItem(
     message: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
-){
+) {
     Row(
         modifier = modifier.padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-    ){
+    ) {
         Text(
             text = message,
             maxLines = 2,
@@ -158,7 +159,7 @@ fun ErrorItem(
         Button(
             onClick = onClick,
             modifier = Modifier.padding(8.dp)
-        ){
+        ) {
             Text(text = "Try again!")
         }
     }
@@ -166,8 +167,8 @@ fun ErrorItem(
 
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
-fun ItemPreview(){
-    RickyMortyAppTheme{
+fun ItemPreview() {
+    RickyMortyAppTheme {
         CharacterItem(
             item = Character(
                 id = 1,
@@ -176,8 +177,6 @@ fun ItemPreview(){
                 status = "Alive",
                 gender = "Male",
                 species = "Human"
-
-
             )
         )
     }

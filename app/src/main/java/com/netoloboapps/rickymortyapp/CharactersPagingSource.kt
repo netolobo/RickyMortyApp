@@ -10,16 +10,16 @@ class CharactersPagingSource
 ) : PagingSource<Int, Character>(){
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
-        try {
+        return try {
             val nextPage = params.key ?: 1
             val repos = restInterface.getCharacters(nextPage).characters
-            return LoadResult.Page(
+            LoadResult.Page(
                 data = repos,
                 prevKey = if(nextPage == 1) null else nextPage -1,
                 nextKey = nextPage + 1
             )
         }catch (e: Exception){
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
 
