@@ -15,7 +15,7 @@ object RickyMortyModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitApi() : RickMortyApiService{
+    fun provideRetrofitApi(): RickMortyApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://rickandmortyapi.com/api/")

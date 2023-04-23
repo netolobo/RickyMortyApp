@@ -15,9 +15,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             RickyMortyAppTheme {
-                val viewModel : RickMortyViewModel = hiltViewModel()
+                val viewModel: RickMortyViewModel = hiltViewModel()
                 val charactersFlow = viewModel.characters
-                val lazyCharacterItem: LazyPagingItems<Character> = charactersFlow.collectAsLazyPagingItems()
+                val lazyCharacterItem: LazyPagingItems<Character> =
+                    charactersFlow.collectAsLazyPagingItems()
                 CharactersScreen(lazyCharacterItem)
             }
         }

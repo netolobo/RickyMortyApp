@@ -12,9 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RickMortyViewModel
-    @Inject constructor(
+@Inject constructor(
     private val charactersPagingSource: CharactersPagingSource
-) : ViewModel(){
+) : ViewModel() {
     val characters: Flow<PagingData<Character>> = Pager(
         config = PagingConfig(pageSize = 20),
         pagingSourceFactory = {

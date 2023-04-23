@@ -42,6 +42,7 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
                     )
                 }
             }
+
             is LoadState.Error -> {
                 val error = refreshLoadState.error
                 item {
@@ -52,6 +53,7 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
                     )
                 }
             }
+
             else -> {}
         }
 
@@ -61,6 +63,7 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
                     LoadingItem(Modifier.fillParentMaxWidth())
                 }
             }
+
             is LoadState.Error -> {
                 val error = appendLoadState.error
                 item {
@@ -70,6 +73,7 @@ fun CharactersScreen(characters: LazyPagingItems<Character>) {
                     )
                 }
             }
+
             else -> {}
         }
     }
